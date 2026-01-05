@@ -9,6 +9,7 @@ import pydantic
 import torch
 from pydantic import Field
 from typing_extensions import Callable
+from pydantic import ConfigDict
 
 from mergekit.architecture import WeightInfo
 from mergekit.common import ImmutableMap, ModelReference
@@ -168,8 +169,12 @@ def __merge_method(
     tt_fields["execute"] = _execute
 
     tt_name = f"{name.title().replace(' ', '')}MergeTask"
-    tt_cls = pydantic.create_model(tt_name, __base__=Task[torch.Tensor], **tt_fields)
-
+    tt_cls = pydantic.create_model(
+        tt_name, 
+        __base__=Task[torch.Tensor], 
+        __config__=ConfigDict(arbitrary_types_allowed=True),
+        **tt_fields
+    )
     mm_fields = {}
 
     def _make_task(
