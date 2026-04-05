@@ -16,7 +16,7 @@ dependencies = [
     "click==8.2.1",
     "safetensors~=0.5.2",
     "accelerate~=1.6.0",
-    "pydantic~=2.10.6",
+    "pydantic~=2.11.10",
     "immutables==0.21",
     "transformers>=4.45.2",
     "tokenizers>=0.20.1",
